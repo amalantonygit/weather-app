@@ -24,7 +24,6 @@ build_project () {
 prep_to_receive_new_files () {
     echo -e "Preparing Server to receive new build";
     ssh ubuntu@3.80.198.11 -i $1 'cd weather-app/; mkdir build-new/';
-​
 }
 ​
 receive_new_files () {

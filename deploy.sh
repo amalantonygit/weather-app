@@ -23,23 +23,23 @@ build_project () {
 ​
 prep_to_receive_new_files () {
     echo -e "Preparing Server to receive new build";
-    ssh weavers@137.184.21.199 -i $1 'cd chartbuilder_demo/; mkdir build-new/';
+    ssh weavers@3.80.198.11 -i $1 'cd weather-app/; mkdir build-new/';
 ​
 }
 ​
 receive_new_files () {
     echo -e "Copying new files to server";
-    scp -i $1 -r ./build/* weavers@137.184.21.199:~/chartbuilder_demo/build-new/;
+    scp -i $1 -r ./build/* weavers@3.80.198.11:~/weather-app/build-new/;
 }
 ​
 remove_previous_files_in_remote () {
     echo -e "Removing previous project files in Server";
-    ssh weavers@137.184.21.199 -i $1 'cd chartbuilder_demo/; mv build/ build-old/; mv build-new/ build/; rm -rf build-old/;';
+    ssh weavers@137.184.21.199 -i $1 'cd weather-app/; mv build/ build-old/; mv build-new/ build/; rm -rf build-old/;';
 }
 ​
 restart_pm2_process () {
     echo -e "Restarting PM2 Process";
-    ssh weavers@137.184.21.199 -i $1 'cd chartbuilder_demo/; pm2 restart chartbuilder_demo;';
+    ssh weavers@3.80.198.11 -i $1 'cd weather-app/; pm2 restart weather-app;';
     echo -e "Deployment Complete";
 }
 ​

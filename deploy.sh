@@ -27,7 +27,7 @@ remove_previous_files_in_remote () {
 
 restart_pm2_process () {
     echo -e "Restarting PM2 Process";
-    ssh ubuntu@3.80.198.11 -i $1 -tt 'cd weather-app/; pm2 delete weather-app || : && pm2 serve build 80 --name weather-app';
+    ssh ubuntu@3.80.198.11 -i $1 -tt 'cd weather-app/; pm2 delete weather-app || : && pm2 serve build 3000 --name weather-app';
     echo -e "Deployment Complete";
 }
 

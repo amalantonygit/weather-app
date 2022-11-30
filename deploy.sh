@@ -17,7 +17,7 @@ install_dependencies () {
 ​
 build_project () {
     echo -e "Building Project in Local Machine";
-    npm run build;
+    docker run -w /app -v $(pwd):/app node npm run build;
     echo -e "Project Build Successful";
 }
 ​

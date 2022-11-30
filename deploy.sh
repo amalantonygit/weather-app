@@ -43,7 +43,7 @@ restart_pm2_process () {
 }
 ​
 start_deploy $1;
-install_dependencies
+#install_dependencies
 build_project;
 prep_to_receive_new_files $1;
 receive_new_files $1;

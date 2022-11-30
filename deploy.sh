@@ -33,7 +33,7 @@ receive_new_files () {
 ​
 remove_previous_files_in_remote () {
     echo -e "Removing previous project files in Server";
-    ssh ubuntu@137.184.21.199 -i $1 'cd weather-app/; mv build/ build-old/; mv build-new/ build/; rm -rf build-old/;';
+    ssh ubuntu@3.80.198.11 -i $1 'cd weather-app/; mv build/ build-old/; mv build-new/ build/; rm -rf build-old/;';
 }
 ​
 restart_pm2_process () {

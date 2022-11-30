@@ -28,7 +28,7 @@ prep_to_receive_new_files () {
 ​
 receive_new_files () {
     echo -e "Copying new files to server";
-    scp -i $1 -r ./build/* ubuntu@3.80.198.11:~/weather-app/build-new/;
+    scp -i $1 -r ./dist/* ubuntu@3.80.198.11:~/weather-app/build-new/;
 }
 ​
 remove_previous_files_in_remote () {

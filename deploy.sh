@@ -12,7 +12,7 @@ start_deploy () {
 
 prep_to_receive_new_files () {
     echo -e "Preparing Server to receive new build";
-    ssh "ubuntu@$REMOTE_SERVER_IP" -i $1 -tt 'cd weather-app/; mkdir build-new/';
+    ssh -v "ubuntu@$REMOTE_SERVER_IP" -i $1 -tt 'cd weather-app/; mkdir build-new/';
 }
 
 receive_new_files () {
@@ -22,12 +22,12 @@ receive_new_files () {
 
 remove_previous_files_in_remote () {
     echo -e "Removing previous project files in Server";
-    ssh "ubuntu@$REMOTE_SERVER_IP" -i $1 -tt 'cd weather-app/; mv build/ build-old/; mv build-new/ build/; rm -rf build-old/;';
+    ssh -v "ubuntu@$REMOTE_SERVER_IP" -i $1 -tt 'cd weather-app/; mv build/ build-old/; mv build-new/ build/; rm -rf build-old/;';
 }
 
 restart_pm2_process () {
     echo -e "Restarting PM2 Process";
-    ssh "ubuntu@$REMOTE_SERVER_IP" -i $1 -tt 'cd weather-app/; pm2 delete weather-app || : && pm2 serve build 3000 --name weather-app';
+    ssh -v "ubuntu@$REMOTE_SERVER_IP" -i $1 -tt 'cd weather-app/; pm2 delete weather-app || : && pm2 serve build 3000 --name weather-app';
     echo -e "Deployment Complete";
 }
 

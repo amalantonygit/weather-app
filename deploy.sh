@@ -11,23 +11,23 @@ start_deploy () {
 }
 
 prep_to_receive_new_files () {
-    echo -e "Preparing Server to receive new build";
-    ssh "ubuntu@$REMOTE_SERVER_IP" -o "StrictHostKeyChecking=no" -i $1 -tt 'cd weather-app/; mkdir build-new/';
+    echo -e "Preparing Server to receive new source code";
+    ssh "ubuntu@$REMOTE_SERVER_IP" -o "StrictHostKeyChecking=no" -i $1 -tt 'cd currency-api/; mkdir build-new/';
 }
 
 receive_new_files () {
     echo -e "Copying new files to server";
-    scp -o "StrictHostKeyChecking=no" -i $1 -r ./dist/* "ubuntu@$REMOTE_SERVER_IP":~/weather-app/build-new/;
+    scp -o "StrictHostKeyChecking=no" -i $1 -r ./dist/* "ubuntu@$REMOTE_SERVER_IP":~/currency-api/build-new/;
 }
 
 remove_previous_files_in_remote () {
     echo -e "Removing previous project files in Server";
-    ssh "ubuntu@$REMOTE_SERVER_IP" -o "StrictHostKeyChecking=no" -i $1 -tt 'cd weather-app/; mv build/ build-old/; mv build-new/ build/; rm -rf build-old/;';
+    ssh "ubuntu@$REMOTE_SERVER_IP" -o "StrictHostKeyChecking=no" -i $1 -tt 'cd currency/; mv build/ build-old/; mv build-new/ build/; rm -rf build-old/;';
 }
 
 restart_pm2_process () {
     echo -e "Restarting PM2 Process";
-    ssh "ubuntu@$REMOTE_SERVER_IP" -o "StrictHostKeyChecking=no" -i $1 -tt 'cd weather-app/; pm2 delete weather-app || : && pm2 serve build 3000 --name weather-app';
+    ssh "ubuntu@$REMOTE_SERVER_IP" -o "StrictHostKeyChecking=no" -i $1 -tt 'cd currency-api/; pm2 delete currency-api || : && pm2 start --name currency-api';
     echo -e "Deployment Complete";
 }
 
